@@ -6,7 +6,7 @@ const Button = ({ mode = 'Primary', className = 'primary', disabled, ...restProp
   mode === 'Secondary' ? className = 'secondary' : className = 'primary'
 
   return <button type="button"
-    // mode={mode}
+    mode={mode}
     className={`button ${className}`}
     disabled={disabled}
     {...restProps}>
