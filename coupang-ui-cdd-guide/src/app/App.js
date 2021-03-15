@@ -1,8 +1,9 @@
 // import './App.scss'
 // import logo from 'assets/logo.svg'
-import Logo from '../components/Logo/Logo'
-import Button from '../components/Button/Button'
+import Logo from 'components/Logo/Logo'
+import Button from 'components/Button/Button'
 import FormIcon from 'components/FormIcon/FormIcon'
+import Checkbox from 'components/Checkbox/Checkbox'
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Logo title="coupang" />
       <Button />
       <FormIcon />
+      <Checkbox />
     </>
     /*<div className="App">
       <header className="App-header">
