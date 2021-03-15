@@ -1,9 +1,15 @@
-import './App.scss'
-import logo from 'assets/logo.svg'
+// import './App.scss'
+// import logo from 'assets/logo.svg'
+import Logo from '../components/Logo/Logo'
+import Button from '../components/Button/Button'
 
 function App() {
   return (
-    <div className="App">
+    <>
+      <Logo title="coupang" />
+      <Button />
+    </>
+    /*<div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -18,7 +24,7 @@ function App() {
           React를 배워보세요
         </a>
       </header>
-    </div>
+    </div>*/
   )
 }
 
