@@ -11,12 +11,14 @@ export default function Counter() {
   // 버튼 클릭시 동작할 이벤트 함수 정의
   const onIncrease = () => {
     // console.log('+1')
-    setNumber(number + 1)
+    // setNumber에 업데이트하는 함수를 넣어줄수도 있다.
+    // 최적화하는 단계에서 필요하다.
+    setNumber(prevNumber => prevNumber + 1)
   }
 
   const onDecrease = () => {
     // console.log('-1')
-    setNumber(number - 1)
+    setNumber(prevNumber => prevNumber - 1)
   }
 
   return (
