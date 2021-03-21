@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 
 export default function Input() {
   // useState : 객체 형태로 상태 관리
@@ -7,6 +7,9 @@ export default function Input() {
     name: '',
     nickname: '',
   })
+
+  // useRef 호출
+  const nameInput = useRef()
 
   // inputs의 프로퍼티를 구조 분해 할당
   const { name, nickname } = inputs
@@ -33,6 +36,8 @@ export default function Input() {
       name: '',
       nickname: '',
     })
+    // useRef로 참조하고 있는 DOM에 조작하기 : .current
+    nameInput.current.focus()
   }
 
   return (
@@ -42,6 +47,8 @@ export default function Input() {
         placeholder="이름"
         onChange={onChange}
         value={name}
+        // ref : useRef로 참조할 DOM
+        ref={nameInput}
       />
       <input
         name="nickname"
