@@ -1,9 +1,9 @@
-import Input from 'components/Input'
+import UserList from 'components/UserList'
 
 function App() {
   return (
     <>
-      <Input />
+      <UserList />
     </>
   )
 }
