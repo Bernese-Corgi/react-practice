@@ -1,5 +1,16 @@
 import React from 'react'
 
+function User({ user }) {
+  return (
+    <li>
+      <b>{user.username}</b>
+      <span style={{
+        color: 'salmon'
+      }}>({user.email})</span>
+    </li>
+  )
+}
+
 export default function UserList() {
   const users = [
     {
@@ -21,24 +32,9 @@ export default function UserList() {
 
   return (
     <ul>
-      <li>
-        <b>{users[0].username}</b>
-        <span style={{
-          color: 'salmon'
-        }}>({users[0].email})</span>
-      </li>
-      <li>
-        <b>{users[1].username}</b>
-        <span style={{
-          color: 'salmon'
-        }}>({users[1].email})</span>
-      </li>
-      <li>
-        <b>{users[2].username}</b>
-        <span style={{
-          color: 'salmon'
-        }}>({users[2].email})</span>
-      </li>
+      <User user={users[0]} />
+      <User user={users[1]} />
+      <User user={users[2]} />
     </ul>
   )
 }
