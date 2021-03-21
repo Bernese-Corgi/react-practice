@@ -32,9 +32,12 @@ export default function UserList() {
 
   return (
     <ul>
-      <User user={users[0]} />
-      <User user={users[1]} />
-      <User user={users[2]} />
+      {
+        users.map(
+          // key는 고유한 값으로 넣어줘야 한다.
+          user => (<User user={user} key={user.id} />)
+        )
+      }
     </ul>
   )
 }
