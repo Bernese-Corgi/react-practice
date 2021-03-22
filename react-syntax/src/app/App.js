@@ -1,7 +1,20 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import UserList from 'components/UserList';
+import CreateUser from 'components/CreateUser';
 
 function App() {
+  const [inputs, setInputs] = useState({
+    username: '',
+    email: '',
+  });
+
+  const { username, email } = inputs;
+
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    setInputs({ ...inputs, [name]: value });
+  };
+
   const users = [
     {
       id: 1,
@@ -30,6 +43,12 @@ function App() {
 
   return (
     <>
+      <CreateUser
+        username={username}
+        email={email}
+        onChange={onChange}
+        onCreate={onCreate}
+      />
       <UserList users={users} />
     </>
   );
