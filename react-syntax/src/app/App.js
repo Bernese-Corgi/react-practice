@@ -15,7 +15,7 @@ function App() {
     setInputs({ ...inputs, [name]: value });
   };
 
-  const users = [
+  const [users, setUsers] = useState([
     {
       id: 1,
       username: 'Jinyoung',
@@ -31,12 +31,27 @@ function App() {
       username: 'Jinee',
       email: 'jn@gmail.com',
     },
-  ];
+  ]);
 
   // nextId에 저장된 4라는 값을 기억하고 싶을때 useRef를 사용할 수 있다.
   const nextId = useRef(4);
 
   const onCreate = () => {
+    const user = {
+      id: nextId.current,
+      username,
+      email,
+    };
+
+    // 기존 배열을 복사하고, 새로운 항목을 뒤에 추가한다.
+    setUsers([...users, user]);
+    // 같은 문법
+    // setUsers(users.concat(user))
+
+    setInputs({
+      username: '',
+      email: '',
+    });
     console.log(nextId.current); // 4
     nextId.current += 1;
   };
