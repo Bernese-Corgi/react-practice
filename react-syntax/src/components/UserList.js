@@ -2,24 +2,24 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
 
-function User({ user, onRemove, onToggle }) {
+function User({ user, onRemove, onToggle /* props로 받아온 값들 */ }) {
   const { username, email, id, active } = user;
+
   React.useEffect(() => {
-    // 이 함수가 호출되는 시점: UI가 화면에 나타난 상태 이후!
-    console.log('컴포넌트가 화면에 나타남');
-    // 컴포넌트가 마운트될 때 주로 추가하는 작업
-    // 1. props로 받은 값을 컴포넌트의 state로 설정
-    // 2. REST API : 외부 API 요청
-    // 3. 라이브러리 사용 (ex. D3, Video.js)
-    // 4. setInterval, setTimeout
-    // 클린업 함수
+    // 내부의 콜백함수는 특정 값이 업데이트된 직후에 실행된다.
+    console.log('user 값이 설정됨🔻 ', user);
     return () => {
-      // 언마운트될 때 주로 하는 작업
-      // 1. cleatInterval, clearTimeout
-      // 2. 라이브러리 인스턴스 제거
-      console.log('컴포넌트가 화면에서 사라짐');
+      // cleanup
+      console.log('user 값이 바뀌기 전🔻 ', user);
     };
-  }, []);
+    // [user] : 의존성 배열
+    // 1. props로 받아온 값들이나 useState로 상태를 관리중인 것들을 넣어주게 되면 의존배열에 넣어 설정해야한다.
+    //    의존성 배열에 넣어야 최신의 상태를 참조할 수 있다.
+    //    이러한 값들을 의존배열에 넣지 않는다면?
+    //    -> 의존성
+    // 2. user 정보가 설정되거나 바뀔때마다 내부의 콜백함수가 호출된다.
+    //    마운트될때도 내부의 콜백함수가 호출된다.
+  }, [user]);
 
   return (
     <li>
