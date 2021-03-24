@@ -4,6 +4,22 @@ import React from 'react';
 
 function User({ user, onRemove, onToggle }) {
   const { username, email, id, active } = user;
+  React.useEffect(() => {
+    // 이 함수가 호출되는 시점: UI가 화면에 나타난 상태 이후!
+    console.log('컴포넌트가 화면에 나타남');
+    // 컴포넌트가 마운트될 때 주로 추가하는 작업
+    // 1. props로 받은 값을 컴포넌트의 state로 설정
+    // 2. REST API : 외부 API 요청
+    // 3. 라이브러리 사용 (ex. D3, Video.js)
+    // 4. setInterval, setTimeout
+    // 클린업 함수
+    return () => {
+      // 언마운트될 때 주로 하는 작업
+      // 1. cleatInterval, clearTimeout
+      // 2. 라이브러리 인스턴스 제거
+      console.log('컴포넌트가 화면에서 사라짐');
+    };
+  }, []);
 
   return (
     <li>
