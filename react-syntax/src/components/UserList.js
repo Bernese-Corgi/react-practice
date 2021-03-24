@@ -1,11 +1,21 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
 
-function User({ user, onRemove }) {
-  const { username, email, id } = user;
+function User({ user, onRemove, onToggle }) {
+  const { username, email, id, active } = user;
 
   return (
     <li>
-      <b>{username}</b>
+      <b
+        style={{
+          color: active ? 'green' : 'black',
+          cursor: 'pointer',
+        }}
+        onClick={() => onToggle(id)}
+      >
+        {username}
+      </b>
       <span
         style={{
           color: 'salmon',
@@ -21,13 +31,18 @@ function User({ user, onRemove }) {
   );
 }
 
-export default function UserList({ users, onRemove }) {
+export default function UserList({ users, onRemove, onToggle }) {
   return (
     <ul>
       {users.map(
         // key는 고유한 값으로 넣어줘야 한다.
         (user) => (
-          <User user={user} key={user.id} onRemove={onRemove} />
+          <User
+            user={user}
+            key={user.id}
+            onRemove={onRemove}
+            onToggle={onToggle}
+          />
         )
       )}
     </ul>

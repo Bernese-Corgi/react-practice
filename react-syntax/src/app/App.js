@@ -20,16 +20,19 @@ function App() {
       id: 1,
       username: 'Jinyoung',
       email: 'jy@gmail.com',
+      active: false,
     },
     {
       id: 2,
       username: 'Jinjoo',
       email: 'jj@gmail.com',
+      active: false,
     },
     {
       id: 3,
       username: 'Jinee',
       email: 'jn@gmail.com',
+      active: false,
     },
   ]);
 
@@ -61,6 +64,16 @@ function App() {
     setUsers(users.filter((user) => user.id !== id));
   };
 
+  // 특정 값만 업데이트
+  const onToggle = (id) => {
+    setUsers(
+      users.map((user) =>
+        // 인수로 받은 user의 id가 일치하는 요소를 클릭하면 활성화 상태 변경
+        user.id === id ? { ...user, active: !user.active } : user
+      )
+    );
+  };
+
   return (
     <>
       <CreateUser
@@ -69,7 +82,7 @@ function App() {
         onChange={onChange}
         onCreate={onCreate}
       />
-      <UserList users={users} onRemove={onRemove} />
+      <UserList users={users} onRemove={onRemove} onToggle={onToggle} />
     </>
   );
 }
