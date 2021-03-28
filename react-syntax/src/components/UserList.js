@@ -6,20 +6,10 @@ function User({ user, onRemove, onToggle /* props로 받아온 값들 */ }) {
   const { username, email, id, active } = user;
 
   React.useEffect(() => {
-    // 내부의 콜백함수는 특정 값이 업데이트된 직후에 실행된다.
-    console.log('user 값이 설정됨🔻 ', user);
-    return () => {
-      // cleanup
-      console.log('user 값이 바뀌기 전🔻 ', user);
-    };
-    // [user] : 의존성 배열
-    // 1. props로 받아온 값들이나 useState로 상태를 관리중인 것들을 넣어주게 되면 의존배열에 넣어 설정해야한다.
-    //    의존성 배열에 넣어야 최신의 상태를 참조할 수 있다.
-    //    이러한 값들을 의존배열에 넣지 않는다면?
-    //    -> 이전의 user 상태를 가리키고, 마운트, 언마운트 시에만 실행된다.
-    // 2. user 정보가 설정되거나 바뀔때마다 내부의 콜백함수가 호출된다.
-    //    마운트될때도 내부의 콜백함수가 호출된다.
-  }, [user]);
+    // 리액트에서 부모 컴포넌트가 리렌더링되면 자식 컴포넌트도 리렌더링된다.
+    // 가상돔 상에서는 모든 사항을 렌더링하고 나서
+    console.log(user);
+  });
 
   return (
     <li>
