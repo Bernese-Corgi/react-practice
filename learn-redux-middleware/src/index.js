@@ -3,11 +3,21 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+// Provider
+import { Provider } from 'react-redux';
+// Store 생성
+import { createStore } from 'redux';
+// rootReducer import
+import rootReducer from './modules';
+
+// store 생성
+const store = createStore(rootReducer);
 
 ReactDOM.render(
-  <React.StrictMode>
+  // App 컴포넌트를 Provider로 감싸고, store를 props로 전달
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
 
