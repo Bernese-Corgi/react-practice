@@ -2,6 +2,12 @@ import React, { useRef, useState } from 'react';
 import UserList from 'components/UserList';
 import CreateUser from 'components/CreateUser';
 
+function countActiveUsers(users) {
+  console.log('활성 사용자 수를 세는 중...');
+  // active가 true인 것들만 filter한 후 배열의 길이를 세기
+  return users.filter((user) => user.active).length;
+}
+
 function App() {
   const [inputs, setInputs] = useState({
     username: '',
@@ -11,6 +17,8 @@ function App() {
   const { username, email } = inputs;
 
   const onChange = (e) => {
+    // 상태를 바꿀 때 컴포넌트가 리렌더링된다
+    // input의 value값이 변경될 때마다 컴포넌트가 리렌더링된다.
     const { name, value } = e.target;
     setInputs({ ...inputs, [name]: value });
   };
@@ -55,7 +63,7 @@ function App() {
       username: '',
       email: '',
     });
-    console.log(nextId.current); // 4
+    // console.log(nextId.current); // 4
     nextId.current += 1;
   };
 
@@ -74,6 +82,19 @@ function App() {
     );
   };
 
+  // 아래와 같이 useMemo를 사용하지 않으면 input의 value값이 수정될 때마다 컴포넌트가 리렌더링된다 => 리렌더링될때마다 활성 사용자 수를 센다.
+  // const count = countActiveUsers(users);
+
+  // useMemo: 이전에 연산된 값을 재사용, 성능 최적화 측면
+  // useMemo는 특정 값이 바뀌었을 때만 특정 함수를 실행해서 연산을 처리한다.
+  // 원하는 값이 바뀌지 않았다면 리렌더링할 때 이전에 만들어놨던 값을 재사용할 수 있게 한다.
+  const count = React.useMemo(
+    // 첫번째 매개변수 : 함수형태
+    () => countActiveUsers(users),
+    // deps 설정 : deps 배열 안의 값이 변경될 때에만 콜백함수를 실행한다.
+    [users]
+  );
+
   return (
     <>
       <CreateUser
@@ -83,6 +104,7 @@ function App() {
         onCreate={onCreate}
       />
       <UserList users={users} onRemove={onRemove} onToggle={onToggle} />
+      <div>활성 사용자 수 {count}</div>
     </>
   );
 }
