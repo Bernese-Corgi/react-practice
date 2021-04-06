@@ -1,25 +1,42 @@
 // import useState : useState 사용하기
-import React, { useState } from 'react'
+import React, { useReducer } from 'react';
+
+// reducer 함수
+function reducer(state, action) {
+  // state의 타입은 무엇이든 될 수 있다. 이 예제에서는 숫자.
+  switch (action.type) {
+    case 'INCREMENT':
+      // 결과값은 다음에 올 상태값
+      return state + 1;
+    case 'DECREMENT':
+      return state - 1;
+    default:
+      throw new Error('Unhandled action');
+  }
+}
 
 export default function Counter() {
-  // useState: 현재 상태의 기본값 지정과, 업데이트 함수를 설정
-  // 첫번째 요소 : state, 현재 상태
-  // 두번째 요소 : setState, 현재 상태를 업데이트하는 함수
-  // useState(0) : 괄호 안에는 현재 상태의 가본값을 설정할 수 있다.
-  const [number, setNumber] = useState(0)
+  // useReducer
+  // dispatch : 액션을 발생시킨다.
+  // useReducer의 매개변수
+  // 1. reducer 함수
+  // 2. 초기값
+  const [number, dispatch] = useReducer(reducer, 0);
 
   // 버튼 클릭시 동작할 이벤트 함수 정의
   const onIncrease = () => {
-    // console.log('+1')
-    // setNumber에 업데이트하는 함수를 넣어줄수도 있다.
-    // 최적화하는 단계에서 필요하다.
-    setNumber(prevNumber => prevNumber + 1)
-  }
+    // dispatch로 액션의 type을 지정해서 액션을 발생시킨다.
+    dispatch({
+      type: 'INCREMENT',
+    });
+  };
 
   const onDecrease = () => {
-    // console.log('-1')
-    setNumber(prevNumber => prevNumber - 1)
-  }
+    // dispatch로 액션의 type을 지정해서 액션을 발생시킨다.
+    dispatch({
+      type: 'DECREMENT',
+    });
+  };
 
   return (
     <div>
@@ -29,5 +46,5 @@ export default function Counter() {
       <button onClick={onIncrease}>+1</button>
       <button onClick={onDecrease}>-1</button>
     </div>
-  )
+  );
 }
