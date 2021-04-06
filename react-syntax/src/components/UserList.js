@@ -2,16 +2,13 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
 
-function User({ user, onRemove, onToggle /* props로 받아온 값들 */ }) {
+// React.memo: props가 바뀔때만 리렌더링
+const User = React.memo(function User({
+  user,
+  onRemove,
+  onToggle /* props로 받아온 값들 */,
+}) {
   const { username, email, id, active } = user;
-
-  React.useEffect(() => {
-    // effect 함수 : 1. 마운트된 이후 실행 2. 상태가 업데이트된 이후 실행
-    return () => {
-      // cleanup 함수 : 업데이트되기 바로 직전에 호출된다.
-    };
-    // [   ] : 배열 안의 값이 변경될 경우에만 콜백함수를 실행한다.
-  }, []);
 
   return (
     <li>
@@ -37,9 +34,9 @@ function User({ user, onRemove, onToggle /* props로 받아온 값들 */ }) {
       {/* <button onClick={onRemove(user.id)}>x</button> */}
     </li>
   );
-}
+});
 
-export default function UserList({ users, onRemove, onToggle }) {
+function UserList({ users, onRemove, onToggle }) {
   return (
     <ul>
       {users.map(
@@ -56,3 +53,6 @@ export default function UserList({ users, onRemove, onToggle }) {
     </ul>
   );
 }
+
+// React.memo: props가 바뀔때만 리렌더링
+export default React.memo(UserList);

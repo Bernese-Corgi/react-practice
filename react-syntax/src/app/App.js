@@ -62,7 +62,7 @@ function App() {
     };
 
     // 기존 배열을 복사하고, 새로운 항목을 뒤에 추가한다.
-    setUsers([...users, user]);
+    setUsers((users) => [...users, user]);
     // 같은 문법
     // setUsers(users.concat(user))
 

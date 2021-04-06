@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function CreateUser({ username, email, onChange, onCreate }) {
+function CreateUser({ username, email, onChange, onCreate }) {
   return (
     <div>
       <input
@@ -25,3 +25,6 @@ export default function CreateUser({ username, email, onChange, onCreate }) {
     </div>
   );
 }
+
+// React.memo: props가 바뀔때만 리렌더링
+export default React.memo(CreateUser);
