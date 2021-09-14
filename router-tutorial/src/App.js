@@ -14,7 +14,7 @@ function App() {
         </li>
       </ul>
       <Route path="/" component={HomePage} exact={true} />
-      <Route path="/about" component={AboutPage} />
+      <Route path={["/about", "/info"]/* path의 주소를 배열로 설정하면 여러 경로에서 같은 컴포넌트를 보여줄 수 있다. */} component={AboutPage} />
     </div>
   );
 }
