@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router';
 import { Link } from 'react-router-dom';
-import { UserProfile } from '../components';
+import { UserProfile, WithRouterEX } from '../components';
 
 const Profiles = () => {
   return (
@@ -27,6 +27,8 @@ const Profiles = () => {
         // match.params.username 값을 통해 현재 username 값을 조회할 수 있다.
         component={UserProfile}
       />
+      {/* params에 username을 읽을 수 없는 상황이므로 match의 params 객체가 비어있다. */}
+      <WithRouterEX Comp="src/container/Profiles.js" />
     </div>
   );
 };

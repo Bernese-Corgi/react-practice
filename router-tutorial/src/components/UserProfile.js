@@ -1,4 +1,5 @@
 import React from 'react';
+import { WithRouterEX } from '.';
 
 const data = {
   userA /* match.params 안의 username과 일치하는 프로퍼티 키 */: {
@@ -12,7 +13,6 @@ const data = {
 };
 
 const UserProfile = ({ match }) => {
-  console.log(match);
   const { username } = match.params;
   // data에서 match.params.username과 해당하는 프로퍼티 키에 해당하는 값을 변수 profile에 저장
   const profile = data[username];
@@ -28,6 +28,8 @@ const UserProfile = ({ match }) => {
         {username}({profile.name})
       </h3>
       <p>{profile.description}</p>
+      {/* params의 username을 읽을 수 있다. */}
+      <WithRouterEX Comp="src/components/UserProfile.js" />
     </div>
   );
 };
