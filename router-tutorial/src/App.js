@@ -1,5 +1,6 @@
 import { Route } from 'react-router';
 import { Link } from 'react-router-dom';
+import { History } from './components';
 import { AboutPage, HomePage, ProfilesPage } from './page';
 
 function App() {
@@ -15,6 +16,9 @@ function App() {
         <li>
           <Link to="/profiles">프로필</Link>
         </li>
+        <li>
+          <Link to="/history">History</Link>
+        </li>
       </ul>
       <Route path="/" component={HomePage} exact={true} />
       <Route
@@ -27,6 +31,7 @@ function App() {
         component={AboutPage}
       />
       <Route path="/profiles" component={ProfilesPage} />
+      <Route path="/history" component={History} />
     </div>
   );
 }

@@ -3,9 +3,7 @@ import { Route } from 'react-router';
 import { Link } from 'react-router-dom';
 import { UserProfile } from '../components';
 
-const Profiles = (props) => {
-  console.log(props);
-
+const Profiles = () => {
   return (
     <div>
       <h3>사용자 목록:</h3>
