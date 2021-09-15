@@ -1,18 +1,27 @@
 import React from 'react';
 import { Route } from 'react-router';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { UserProfile, WithRouterEX } from '../components';
 
 const Profiles = () => {
+  const activeStyle = {
+    background: 'olive',
+    color: 'white',
+  };
+
   return (
     <div>
       <h3>사용자 목록:</h3>
       <ul>
         <li>
-          <Link to="/profiles/userA">userA 프로필</Link>
+          <NavLink activeStyle={activeStyle} to="/profiles/userA">
+            userA 프로필
+          </NavLink>
         </li>
         <li>
-          <Link to="/profiles/userB">userB 프로필</Link>
+          <NavLink activeStyle={activeStyle} to="/profiles/userB">
+            userB 프로필
+          </NavLink>
         </li>
       </ul>
       <Route
