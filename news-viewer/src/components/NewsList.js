@@ -17,7 +17,7 @@ const NewsListBlock = styled.div`
   }
 `;
 
-const NewsList = () => {
+const NewsList = ({ category }) => {
   // articles 상태
   const [articles, setArticles] = useState(null);
 
@@ -32,9 +32,12 @@ const NewsList = () => {
       setLoading(true);
 
       try {
+        // category 값이 all이면 query 값을 공백으로 설정하고, all이 아니면 `&category=${category}` 형태의 문자열로 설정한다.
+        const query = category === 'all' ? '' : `&category=${category}`;
+
         // news API에 get 요청
         const response = await axios.get(
-          'https://newsapi.org/v2/top-headlines?country=kr&category=science&apiKey=656e5f6ee4c24324a79ec250c2aec539',
+          `https://newsapi.org/v2/top-headlines?country=kr${query}&apiKey=656e5f6ee4c24324a79ec250c2aec539`,
         );
 
         // get 요청의 응답 결과 값 객체 중 articles를 상태값에 설정
@@ -48,7 +51,8 @@ const NewsList = () => {
     };
 
     fetchData();
-  }, []);
+    // category 값이 바뀔때마다 뉴스를 새로 불러와야 하므로 의존성 배열에 넣는다
+  }, [category]);
 
   // 로딩 중일때 렌더링할 컴포넌트
   if (loading) {
