@@ -1,6 +1,7 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
+import usePromise from '../lib/usePromise';
 import NewsItem from './NewsItem';
 
 const NewsListBlock = styled.div`
@@ -18,55 +19,42 @@ const NewsListBlock = styled.div`
 `;
 
 const NewsList = ({ category }) => {
-  // articles 상태
-  const [articles, setArticles] = useState(null);
+  // usePromise 훅 호출하고, 결과값을 배열 디스트럭칭 할당
+  const [loading, response, error] = usePromise(
+    // usePromise 훅의 첫번째 인수에는 promise를 생성하는 콜백 함수를 전달
+    () => {
+      // 쿼리 값에 카테고리 이름대로 설정
+      const query = category === 'all' ? '' : `&category=${category}`;
 
-  // 로딩 상태
-  const [loading, setLoading] = useState(false);
-
-  // article 불러오기
-  useEffect(() => {
-    // 데이터 가져오기 함수, async를 사용하는 함수는 따로 선언해야 한다.
-    const fetchData = async () => {
-      // 로딩 중이므로 loading
-      setLoading(true);
-
-      try {
-        // category 값이 all이면 query 값을 공백으로 설정하고, all이 아니면 `&category=${category}` 형태의 문자열로 설정한다.
-        const query = category === 'all' ? '' : `&category=${category}`;
-
-        // news API에 get 요청
-        const response = await axios.get(
-          `https://newsapi.org/v2/top-headlines?country=kr${query}&apiKey=656e5f6ee4c24324a79ec250c2aec539`,
-        );
-
-        // get 요청의 응답 결과 값 객체 중 articles를 상태값에 설정
-        setArticles(response.data.articles);
-      } catch (error) {
-        console.log(error);
-      }
-
-      // 로딩 상태 false
-      setLoading(false);
-    };
-
-    fetchData();
-    // category 값이 바뀔때마다 뉴스를 새로 불러와야 하므로 의존성 배열에 넣는다
-  }, [category]);
+      // 내부 콜백함수의 반환값으로 axios.get 요청을 작성
+      return axios.get(
+        `https://newsapi.org/v2/top-headlines?country=kr${query}&apiKey=656e5f6ee4c24324a79ec250c2aec539`,
+      );
+    },
+    // category 값이 바뀔때마다 기사를 새로 불러와야 하므로 의존성 배열에 category를 넣어서 전달
+    [category],
+  );
 
   // 로딩 중일때 렌더링할 컴포넌트
   if (loading) {
     return <NewsListBlock>불러오는 중...</NewsListBlock>;
   }
 
-  // !articles를 조회하여 해당 값이 현재 null이 아닌지 검사해야 한다.
-  if (!articles) {
+  // response 값이 아직 설정되지 않았을 때
+  if (!response) {
     return null;
   }
 
-  // ↓ articles이 null이면 컴포넌트를 렌더링 하지 않고, null을 반환하다가 articles 값이 유효한 순간에 컴포넌트를 렌더링한다.
+  if (error) {
+    console.log(error);
+    return <NewsListBlock>에러 발생</NewsListBlock>;
+  }
 
-  // articles 값이 유효할 때
+  // ↓ response가 null이면 컴포넌트를 렌더링 하지 않고, null을 반환하다가 response 값이 유효한 순간에 컴포넌트를 렌더링한다.
+
+  // response 값이 유효할 때
+  const { articles } = response.data;
+
   return (
     <NewsListBlock>
       {articles.map((article) => (
