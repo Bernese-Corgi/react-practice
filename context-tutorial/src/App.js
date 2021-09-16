@@ -1,5 +1,15 @@
+import { ColorBox, SelectColor } from './components';
+import { ColorProvider } from './contexts/color';
+
 function App() {
-  return <div></div>;
+  return (
+    <ColorProvider>
+      <div>
+        <SelectColor />
+        <ColorBox />
+      </div>
+    </ColorProvider>
+  );
 }
 
 export default App;
