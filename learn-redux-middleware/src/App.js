@@ -5,7 +5,7 @@ import PostCardContainer from './containers/PostCardContainer';
 function App() {
   return (
     <div>
-      {/* <CounterContainer /> */}
+      <CounterContainer />
       <PostCardContainer />
     </div>
   );

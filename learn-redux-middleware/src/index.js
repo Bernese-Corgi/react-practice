@@ -6,17 +6,24 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 // Store 생성
 import { applyMiddleware, createStore } from 'redux';
-// rootReducer import
-import rootReducer from './modules';
-// middleware import
+// import rootReducer, rootSaga
+import rootReducer, { rootSaga } from './modules';
+// import middleware
 import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga';
 
 // logger 생성
 const logger = createLogger();
+const sagaMiddleware = createSagaMiddleware();
 
 // store 생성
-const store = createStore(rootReducer, applyMiddleware(logger, thunk));
+const store = createStore(
+  rootReducer,
+  applyMiddleware(logger, thunk, sagaMiddleware)
+);
+
+sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   // App 컴포넌트를 Provider로 감싸고, store를 props로 전달
