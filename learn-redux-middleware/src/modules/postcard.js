@@ -6,12 +6,12 @@ import createRequestThunk from '../lib/createRequestThunk';
 // get post
 const GET_POST = 'postcard/GET_POST';
 const GET_POST_SUCCESS = 'postcard/GET_POST_SUCCESS';
-const GET_POST_FAILURE = 'postcard/GET_POST_FAILURE';
+// const GET_POST_FAILURE = 'postcard/GET_POST_FAILURE';
 
 // get user
 const GET_USERS = 'postcard/GET_USERS';
 const GET_USERS_SUCCESS = 'postcard/GET_USERS_SUCCESS';
-const GET_USERS_FAILURE = 'postcard/GET_USERS_FAILURE';
+// const GET_USERS_FAILURE = 'postcard/GET_USERS_FAILURE';
 
 /* thunk 함수 생성 ------------------------------ */
 // thunk 함수 내부에서 시작 시 / 성공 시 / 실패 시 다른 액션을 디스패치한다.
@@ -73,11 +73,11 @@ export const getUsers = createRequestThunk(GET_USERS, api.getUsers);
 
 /* 초기 상태 --------------------------------- */
 const initialState = {
-  // loading 객체 : 요청의 로딩 중 상태 관리
-  loading: {
-    GET_POST: false,
-    GET_USERS: false,
-  },
+  // // loading 객체 : 요청의 로딩 중 상태 관리
+  // loading: {
+  //   GET_POST: false,
+  //   GET_USERS: false,
+  // },
   post: null,
   users: null,
 };
@@ -85,32 +85,32 @@ const initialState = {
 /* 리듀서 ---------------------------------- */
 const postcard = handleActions(
   {
-    [GET_POST]: (state) => ({
-      ...state,
-      loading: { ...state.loading, GET_POST: true /* 요청 시작 */ },
-    }),
+    // [GET_POST]: (state) => ({
+    //   ...state,
+    //   loading: { ...state.loading, GET_POST: true /* 요청 시작 */ },
+    // }),
     [GET_POST_SUCCESS]: (state, action) => ({
       ...state,
-      loading: { ...state.loading, GET_POST: false /* 요청 완료 */ },
+      // loading: { ...state.loading, GET_POST: false /* 요청 완료 */ },
       post: action.payload,
     }),
-    [GET_POST_FAILURE]: (state, action) => ({
-      ...state,
-      loading: { ...state.loading, GET_POST: false /* 요청 완료 */ },
-    }),
-    [GET_USERS]: (state) => ({
-      ...state,
-      loading: { ...state.loading, GET_USERS: true /* 요청 시작 */ },
-    }),
+    // [GET_POST_FAILURE]: (state, action) => ({
+    //   ...state,
+    //   loading: { ...state.loading, GET_POST: false /* 요청 완료 */ },
+    // }),
+    // [GET_USERS]: (state) => ({
+    //   ...state,
+    //   loading: { ...state.loading, GET_USERS: true /* 요청 시작 */ },
+    // }),
     [GET_USERS_SUCCESS]: (state, action) => ({
       ...state,
-      loading: { ...state.loading, GET_USERS: false /* 요청 완료 */ },
+      // loading: { ...state.loading, GET_USERS: false /* 요청 완료 */ },
       users: action.payload,
     }),
-    [GET_USERS_FAILURE]: (state, action) => ({
-      ...state,
-      loading: { ...state.loading, GET_USERS: false /* 요청 완료 */ },
-    }),
+    // [GET_USERS_FAILURE]: (state, action) => ({
+    //   ...state,
+    //   loading: { ...state.loading, GET_USERS: false /* 요청 완료 */ },
+    // }),
   },
   initialState
 );
