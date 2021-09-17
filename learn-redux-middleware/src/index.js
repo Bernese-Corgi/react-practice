@@ -12,6 +12,7 @@ import rootReducer, { rootSaga } from './modules';
 import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 // logger 생성
 const logger = createLogger();
@@ -20,7 +21,7 @@ const sagaMiddleware = createSagaMiddleware();
 // store 생성
 const store = createStore(
   rootReducer,
-  applyMiddleware(logger, thunk, sagaMiddleware)
+  composeWithDevTools(applyMiddleware(logger, thunk, sagaMiddleware))
 );
 
 sagaMiddleware.run(rootSaga);
