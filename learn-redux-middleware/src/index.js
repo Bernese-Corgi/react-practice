@@ -9,10 +9,10 @@ import { applyMiddleware, createStore } from 'redux';
 // rootReducer import
 import rootReducer from './modules';
 // middleware import
-import loggerMiddleware from './lib/loggerMiddleware';
+import logger from 'redux-logger';
 
 // store 생성
-const store = createStore(rootReducer, applyMiddleware(loggerMiddleware));
+const store = createStore(rootReducer, applyMiddleware(logger));
 
 ReactDOM.render(
   // App 컴포넌트를 Provider로 감싸고, store를 props로 전달
