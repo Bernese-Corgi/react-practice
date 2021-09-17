@@ -3,14 +3,14 @@ import * as api from '../lib/api';
 
 /* 액션 타입 선언: 한 요청당 세 개를 생성해야 한다. --------------------- */
 // get post
-const GET_POST = 'posts/GET_POST';
-const GET_POST_SUCCESS = 'posts/GET_POST_SUCCESS';
-const GET_POST_FAILURE = 'posts/GET_POST_FAILURE';
+const GET_POST = 'postcard/GET_POST';
+const GET_POST_SUCCESS = 'postcard/GET_POST_SUCCESS';
+const GET_POST_FAILURE = 'postcard/GET_POST_FAILURE';
 
 // get user
-const GET_USERS = 'posts/GET_USERS';
-const GET_USERS_SUCCESS = 'posts/GET_USERS_SUCCESS';
-const GET_USERS_FAILURE = 'posts/GET_USERS_FAILURE';
+const GET_USERS = 'postcard/GET_USERS';
+const GET_USERS_SUCCESS = 'postcard/GET_USERS_SUCCESS';
+const GET_USERS_FAILURE = 'postcard/GET_USERS_FAILURE';
 
 /* thunk 함수 생성 ------------------------------ */
 // thunk 함수 내부에서 시작 시 / 성공 시 / 실패 시 다른 액션을 디스패치한다.
@@ -76,7 +76,7 @@ const initialState = {
 };
 
 /* 리듀서 ---------------------------------- */
-const posts = handleActions(
+const postcard = handleActions(
   {
     [GET_POST]: (state) => ({
       ...state,
@@ -108,4 +108,4 @@ const posts = handleActions(
   initialState
 );
 
-export default posts;
+export default postcard;
