@@ -1,12 +1,12 @@
-import { createActions, handleActions } from 'redux-actions';
+import { createAction, handleActions } from 'redux-actions';
 
 // 액션 타입 선언
-const INCREASE = 'INCREASE';
-const DECREASE = 'DECREASE';
+const INCREASE = 'counter/INCREASE';
+const DECREASE = 'counter/DECREASE';
 
 // 액션 생성 함수
-export const increase = createActions(INCREASE); // createActions는 액션 객체를 자동으로 생성해준다.
-export const decrease = createActions(DECREASE);
+export const increase = createAction(INCREASE); // createActions는 액션 객체를 자동으로 생성해준다.
+export const decrease = createAction(DECREASE);
 
 // 초기 상태 : 초기 상태는 숫자도 가능하다.
 const initialState = 0;

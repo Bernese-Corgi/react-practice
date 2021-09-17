@@ -28,7 +28,16 @@ const CounterContainer = ({ number, increase, decrease }) => {
 };
 
 /* connect 함수 사용 ----------------------------- */
-export default connect((state) => ({ number: state.counter }), {
-  increase,
-  decrease,
-})(CounterContainer);
+// export default connect((state) => ({ number: state.counter }), {
+//   increase,
+//   decrease,
+// })(CounterContainer);
+export default connect(
+  (state) => ({
+    number: state.counter,
+  }),
+  {
+    increase,
+    decrease,
+  }
+)(CounterContainer);
