@@ -1,16 +1,32 @@
 import { createAction, handleActions } from 'redux-actions';
 
-// 액션 타입 선언
+/* 액션 타입 선언 -------------------------------- */
 const INCREASE = 'counter/INCREASE';
 const DECREASE = 'counter/DECREASE';
 
-// 액션 생성 함수
+/* 액션 생성 함수 -------------------------------- */
 export const increase = createAction(INCREASE); // createActions는 액션 객체를 자동으로 생성해준다.
 export const decrease = createAction(DECREASE);
 
-// 초기 상태 : 초기 상태는 숫자도 가능하다.
-const initialState = 0;
+/* thunk --------------------------------- */
+// 1초 뒤에 increase 함수 디스패치
+export const increaseAsync = () => (dispatch) => {
+  setTimeout(() => {
+    dispatch(increase());
+  }, 1000);
+};
 
+// 1초 뒤에 decrease 함수 디스패치
+export const decreaseAsync = () => (dispatch) => {
+  setTimeout(() => {
+    dispatch(decrease());
+  }, 1000);
+};
+
+/* 초기 상태 --------------------------------- */
+const initialState = 0; // 초기 상태는 숫자도 가능하다.
+
+/* 리듀서 ---------------------------------- */
 // handleActions 함수 호출로 리듀서 생성하기
 const counter = handleActions(
   // 첫번째 매개변수 : 각 액션에 대한 업데이트 함수

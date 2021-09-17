@@ -1,9 +1,9 @@
 import React from 'react';
 import Counter from '../components/Counter';
 import { useSelector, useDispatch, connect } from 'react-redux';
-import { decrease, increase } from '../modules/counter';
+import { decreaseAsync, increaseAsync } from '../modules/counter';
 
-const CounterContainer = ({ number, increase, decrease }) => {
+const CounterContainer = ({ number, increaseAsync, decreaseAsync }) => {
   /* hooks 사용 ----------------------------------------------------
   // redux store 안에 들어있는 상태값 가져오기
   // state.counter : reduce 이름이 counter이므로 store 안의 counter를 가져온다.
@@ -23,21 +23,21 @@ const CounterContainer = ({ number, increase, decrease }) => {
  ----------------------------------------------------------- */
 
   return (
-    <Counter number={number} onIncrease={increase} onDecrease={decrease} />
+    <Counter
+      number={number}
+      onIncrease={increaseAsync}
+      onDecrease={decreaseAsync}
+    />
   );
 };
 
 /* connect 함수 사용 ----------------------------- */
-// export default connect((state) => ({ number: state.counter }), {
-//   increase,
-//   decrease,
-// })(CounterContainer);
 export default connect(
   (state) => ({
     number: state.counter,
   }),
   {
-    increase,
-    decrease,
+    increaseAsync,
+    decreaseAsync,
   }
 )(CounterContainer);
