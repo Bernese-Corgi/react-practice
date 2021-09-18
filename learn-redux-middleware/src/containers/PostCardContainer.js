@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PostCard from '../components/PostCard';
-import { getPost, getUsers } from '../modules/postcard';
+import { getPost, getUsers } from '../modules/postcardSaga';
 
 const PostCardContainer = ({
   getPost,
@@ -29,9 +29,13 @@ const PostCardContainer = ({
 export default connect(
   // params1: 리덕스 스토어 안의 상태를 컴포넌트의 props로 넘겨주기 위해 설정하는 함수
   // state를 매개변수로 받아오며, 이 값은 현재 스토어가 지니고 있는 상태를 가리킵니다.
-  ({ postcard, loading } /* state.postcard */) => ({
-    post: postcard.post,
-    users: postcard.users,
+  ({
+    //  postcard, // state.postcard
+    postcardSaga,
+    loading,
+  }) => ({
+    post: postcardSaga.post,
+    users: postcardSaga.users,
     loadingPost: loading.GET_POST,
     loadingUsers: loading.GET_USERS,
   }),
